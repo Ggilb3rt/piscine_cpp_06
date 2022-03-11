@@ -1,8 +1,13 @@
 #ifndef LITERAL_HPP
 # define LITERAL_HPP
 
-# include <iostream>
-# include <string>
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <cstdlib>
+#include <cmath>
+#include <sstream>
+#include <limits.h>
 
 #define TYPE_CHAR "Char"
 #define TYPE_INT "Int"
@@ -12,40 +17,54 @@
 
 class Literal
 {
-
 	public:
-
 		Literal();
-		Literal(std::string src);
 		Literal( Literal const & src );
+		Literal(std::string src);
 		~Literal();
 
 		std::string		getStringLiteral() const;
 		std::string		getType() const;
 		double			getDoubleLiteral() const;
 		void			setType();
-		char			getChar() const;
-		int				getInt() const;
-		float			getFloat() const;
-		double			getDouble() const;
+		char			getCastChar() const;
+		int				getCastInt() const;
+		float			getCastFloat() const;
+		double			getCastDouble() const;
+		void			printAll() const;
+		void			printDebug() const;
 
 		Literal &		operator=( Literal const & rhs );
 
 		class	CastErrorException : public std::exception
 		{
 			public:
-				virtual const char* what() const throw() {return ("Can't cast");}
+				virtual const char* what() const throw() {return ("Error when cast");}
 		};
 		class	NonPrintErrorException : public std::exception
 		{
 			public:
-				virtual const char* what() const throw() {return ("non printable");}
+				virtual const char* what() const throw() {return ("Non displayable");}
+		};
+		class	ImpossiblePrintErrorException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw() {return ("impossible");}
 		};
 
 	private:
 		std::string	const	_stringLiteral;
 		double				_doubleLiteral;
 		std::string			_type;
+		
+		bool			isChar() const;
+		bool			isInt() const;
+		bool			isFloat() const;
+		bool			isDouble() const;
+		void			printChar() const;
+		void			printInt() const;
+		void			printFloat() const;
+		void			printDouble() const;
 };
 
 
