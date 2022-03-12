@@ -120,6 +120,8 @@ void		Literal::printFloat() const {
 		suffixe = "f";
 
 	std::cout << "float: " << nb << suffixe << std::endl;
+	// std::cout << "float: " << std::setprecision( 1 ) 
+	// 	<< std::setiosflags( std::ios::fixed) << nb << "f" << std::endl;
 }
 
 void		Literal::printDouble() const {
