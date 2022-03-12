@@ -49,6 +49,7 @@ test : all
 	./$(NAME) nanf
 	./$(NAME) c
 	./$(NAME) 3654.4028234665465465467e+38
+	./$(NAME) 3654.4028234665465465467e-38
 
 test_leaks : all
 	valgrind --leak-check=full ./$(NAME)

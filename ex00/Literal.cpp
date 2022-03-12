@@ -29,6 +29,7 @@ Literal::Literal( const Literal & src ) : _stringLiteral(src.getStringLiteral())
 
 Literal::~Literal()
 {
+	return ;
 }
 
 
@@ -84,19 +85,21 @@ bool 			Literal::isDouble() const {
 }
 
 void			Literal::printChar() const {
-	std::cout << "Char : ";
+	std::cout << "char: ";
 	try
 	{
-		std::cout << this->getCastChar() << std::endl;
+		this->getCastChar();
 	}
 	catch(const std::exception& e)
 	{
 		std::cout << e.what() << '\n';
+		return ;
 	}
+	std::cout << "'" << this->getCastChar() << "'" << std::endl;
 }
 
 void		Literal::printInt() const {
-	std::cout << "Int : ";
+	std::cout << "int: ";
 	try
 	{
 		std::cout << this->getCastInt() << std::endl;
@@ -116,19 +119,22 @@ void		Literal::printFloat() const {
 	if (intPart == HUGE_VAL || intPart == -HUGE_VAL)
 		suffixe = "f";
 
-	std::cout << "Float : " << nb << suffixe << std::endl;
+	std::cout << "float: " << nb << suffixe << std::endl;
 }
 
 void		Literal::printDouble() const {
 	double		intPart;
+	double		fractPart;
 	double		nb = this->getCastDouble();
 	std::string	suffixe;
 	
-	suffixe = std::modf(nb, &intPart) != 0 ? "" : ".0";
-	if (intPart == HUGE_VAL || intPart == -HUGE_VAL || this->_stringLiteral.find("e"))
+	fractPart = std::modf(nb, &intPart);
+	suffixe = fractPart != 0 ? "" : ".0";
+	if (intPart == HUGE_VAL || intPart == -HUGE_VAL)
 		suffixe = "";
-
-	std::cout << "Double : " << nb << suffixe << std::endl;
+	if (fractPart == 0 && this->getStringLiteral().find("e+") != std::string::npos)
+		suffixe = "";
+	std::cout << "double: " << nb << suffixe << std::endl;
 }
 
 void			Literal::printAll() const {
@@ -136,31 +142,6 @@ void			Literal::printAll() const {
 	this->printInt();
 	this->printFloat();
 	this->printDouble();
-}
-
-void			Literal::printDebug() const {
-	std::cout << "is Char : " << this->isChar() << "\t";
-	try
-	{
-		std::cout << this->getCastChar() << std::endl;
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << '\n';
-	}
-	std::cout << "is Int : " << this->isInt() << "\t";
-	try
-	{
-		std::cout << this->getCastInt() << std::endl;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	
-	// cf << std::fixed << std::setprecision(2)
-	std::cout << "is Float : " << this->isFloat() << "\t" << this->getCastFloat() << "f" << std::endl;
-	std::cout << "is Double : " << this->isDouble() << "\t" << this->getCastDouble() << std::endl;
 }
 
 /*
