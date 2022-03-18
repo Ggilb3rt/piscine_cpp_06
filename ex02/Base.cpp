@@ -7,7 +7,7 @@ Base::~Base() {
 }
 
 Base*   generate(void) {
-    int ranNb = rand();
+    int ranNb = std::rand();
 
     if (!(ranNb % 5))
     {
@@ -57,19 +57,21 @@ void    identify(Base& p) {
         std::cout << "A" << std::endl;
         return ;
     }
-    catch (std::bad_cast& e) { if (DEBUG) std::cerr << e.what() << std::endl;}
+    catch (std::exception& e) { if (DEBUG) std::cerr << e.what() << std::endl;}
     try {
         B & refB = dynamic_cast<B &>(p);
         (void) refB;
         std::cout << "B" << std::endl;
         return ;
     }
-    catch (std::bad_cast& e) { if (DEBUG) std::cerr << e.what() << std::endl;}
+    catch (std::exception& e) { if (DEBUG) std::cerr << e.what() << std::endl;}
     try {
         C & refC = dynamic_cast<C &>(p);
         (void) refC;
         std::cout << "C" << std::endl;
         return ;
     }
-    catch (std::bad_cast& e) { if (DEBUG) std::cerr << e.what() << std::endl;}
+    catch (std::exception& e) { if (DEBUG) std::cerr << e.what() << std::endl;}
 }
+
+// utilisation de std::bad_cast& e serai plus precis mais <typeinfo> interdit

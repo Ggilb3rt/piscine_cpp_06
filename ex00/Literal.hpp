@@ -18,7 +18,6 @@
 class Literal
 {
 	public:
-		Literal();
 		Literal( Literal const & src );
 		Literal(std::string src);
 		~Literal();
@@ -53,6 +52,7 @@ class Literal
 		};
 
 	private:
+		Literal();
 		std::string	const	_stringLiteral;
 		double				_doubleLiteral;
 		std::string			_type;

@@ -2,7 +2,7 @@
 #include "Base.hpp"
 
 int main() {
-    srand(time(NULL));
+    std::srand(time(NULL));
 
     std::cout << "------- Basic ---------" << std::endl;
     Base*   val = generate();
@@ -26,5 +26,5 @@ int main() {
         delete base;
         std::cout << std::endl;
     }
-    return 0;
+    return 0;   
 }

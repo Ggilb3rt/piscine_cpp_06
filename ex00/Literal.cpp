@@ -4,11 +4,6 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-Literal::Literal() : _stringLiteral("Nope"), _doubleLiteral(0.0), _type("Nope")
-{
-	return ;
-}
-
 Literal::Literal(std::string src) : _stringLiteral(src)
 {
 	this->_doubleLiteral = std::strtod(this->_stringLiteral.c_str(), NULL);
@@ -83,6 +78,10 @@ bool 			Literal::isDouble() const {
 	iss >> std::noskipws >> d;
 	return iss.eof() && !iss.fail();
 }
+
+/*
+** --------------------------------- PRINTERS ---------------------------------
+*/
 
 void			Literal::printChar() const {
 	std::cout << "char: ";

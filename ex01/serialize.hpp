@@ -2,6 +2,7 @@
 #define SERIALIZE_H
 
 #include <iostream>
+#include <stdint.h>
 
 typedef struct 	s_Data {
 	int			a;

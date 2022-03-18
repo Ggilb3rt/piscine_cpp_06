@@ -15,6 +15,7 @@ void    test(Data *structToTest) {
 int main() {
     Data    base = {1, 'c'};
     Data    *cpyPtr = &base;
+    Data    lol = {23432, 34};
     Data    *nullPtr = NULL;
 
     test(&base);
@@ -22,6 +23,8 @@ int main() {
     test(cpyPtr);
     std::cout << std::endl;
     test(nullPtr);
+    std::cout << std::endl;
+    test(&lol);
 
 
 
